@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensajes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      width: 300px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .message-input {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 12px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    .messages {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .message {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      background-color: #f9f9f9;
+    }
+    .delete-icon {
+      cursor: pointer;
+      color: red;
+    }
+    .sort-button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message-input">
+      <input type="text" id="messageInput" placeholder="Escribe tu mensaje...">
+      <button onclick="addMessage()">Añadir</button>
+    </div>
+    <ul id="messageList" class="messages"></ul>
+    <button class="sort-button" onclick="sortMessages()">Ordenar Alfabéticamente</button>
+  </div>
+
+  <script>
+    let messages = [];
+
+    function addMessage() {
+      const messageInput = document.getElementById("messageInput");
+      const messageText = messageInput.value.trim();
+
+      if (messageText) {
+        messages.push(messageText);
+        messageInput.value = "";
+        displayMessages();
+      }
+    }
+
+    function displayMessages() {
+      const messageList = document.getElementById("messageList");
+      messageList.innerHTML = "";
+
+      messages.forEach((message, index) => {
+        const messageItem = document.createElement("li");
+        messageItem.className = "message";
+
+        const messageText = document.createElement("span");
+        messageText.textContent = message;
+
+        const deleteIcon = document.createElement("span");
+        deleteIcon.className = "delete-icon";
+        deleteIcon.textContent = "🗑️";
+        deleteIcon.onclick = () => deleteMessage(index);
+
+        messageItem.appendChild(messageText);
+        messageItem.appendChild(deleteIcon);
+        messageList.appendChild(messageItem);
+      });
+    }
+
+    function deleteMessage(index) {
+      messages.splice(index, 1);
+      displayMessages();
+    }
+
+    function sortMessages() {
+      messages.sort();
+      displayMessages();
+    }
+  </script>
+</body>
+</html>
+</body>
+</html>

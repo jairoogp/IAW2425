@@ -6,6 +6,39 @@
     <title>Índice de masa corporal</title>
 </head>
 <body>
-    
+    <input id="altura" type="text" placeholder="Indica tu altura en cm"><br>
+    <input id="peso" type="text" placeholder="Indica tu peso en kg"><br>
+    <button onclick="calcular()">calcular</button>
+    <p id="resultado"></p>
+    <p id="resultado2"></p>
+    <script>
+        function calcular(){
+            let peso = parseFloat(document.getElementById("peso").value);
+            let altura = parseFloat(document.getElementById("altura").value);
+            if(isNaN(altura) || isNaN(peso) || altura<=0 || peso <=0){
+                document.getElementById("resultado").innerHTML = "Debes introducir un peso y altura correcto"
+            }
+            let alturaMetros = altura / 100 ;
+            let IMC = peso / (alturaMetros * alturaMetros).toFixed(2);
+
+            if(IMC<18.5){
+                document.getElementById("resultado").innerHTML = "Tienes un peso inferior al normal";
+                document.getElementById("resultado2").innerHTML = "Su IMC es de" +imc;
+
+            }
+            else if(IMC>18.5 && IMC<24.9){
+                document.getElementById("resultado").innerHTML = "Tienes un peso normal";
+                document.getElementById("resultado2").innerHTML = "Su IMC es de" +imc;
+            }
+            else if(IMC>25 && IMC<29.9){
+                document.getElementById("resultado").innerHTML = "Tienes un peso superior al normal";
+                document.getElementById("resultado2").innerHTML = "Su IMC es de" +imc;
+            }
+            else if(IMC>30){
+                document.getElementById("resultado").innerHTML = "Tienes obesidad goldito";
+                document.getElementById("resultado2").innerHTML = "Su IMC es de" +imc;
+            }
+        }
+    </script>
 </body>
 </html>

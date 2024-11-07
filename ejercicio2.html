@@ -13,10 +13,28 @@
     
     <script>
         let mensajes = [];
+        imprimeMensajes();
         function anadir(){
             let mensaje = document.getElementById("elemento").value;
-            if
+            mensajes.push(mensaje);
+            imprimeMensajes();
         }
+        function ordenar(){
+            mensajes.sort();
+            imprimeMensajes();
+        }
+        function imprimeMensajes(){
+            let codigoHTML = "";
+            let longitud = mensajes.length;
+            let icono = "div class='tweet'><img src='iconoTwitter.png'>";
+            for (i=0; i<longitud;i++){
+                let postHTML = icono + mensajes[i] + " ";
+                postHTML += "<button class='btn-image' onclick='eliminar(mensajes[" + i + "]);'></button><br></div>";
+                codigoHTML += postHTML;
+            }
+            document.getElementById("resultado").innerHTML = codigoHTML;
+        }
+
     </script>
 </body>
 </html>

@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir y borrar elementos</title>
+    <style>
+          .btn-image {
+                    background-image: url('iconoPapelera.png');
+                    background-size: cover;
+                    width: 65px;
+                    height: 65px;
+                    float: right;
+                }
+                .tweet {
+                    width:500px;
+                    border: 1px solid gray;
+                    border-radius: 10px;
+                }
+    </style>
 </head>
 <body>
     <input id="elemento" type="text" placeholder="Añade un elemento">
@@ -13,7 +27,6 @@
     
     <script>
         let mensajes = [];
-        imprimeMensajes();
         function anadir(){
             let mensaje = document.getElementById("elemento").value;
             mensajes.push(mensaje);
@@ -23,14 +36,17 @@
             mensajes.sort();
             imprimeMensajes();
         }
+        function eliminar(mensaje){
+            let index = mensajes.indexOf(mensaje);
+            mensajes.splice(index, 1);
+            imprimeMensajes();
+        }
         function imprimeMensajes(){
             let codigoHTML = "";
             let longitud = mensajes.length;
-            let icono = "div class='tweet'><img src='iconoTwitter.png'>";
+            let icono = "<div class='tweet'><img src='iconoTwitter.png'>";
             for (i=0; i<longitud;i++){
-                let postHTML = icono + mensajes[i] + " ";
-                postHTML += "<button class='btn-image' onclick='eliminar(mensajes[" + i + "]);'></button><br></div>";
-                codigoHTML += postHTML;
+                codigoHTML+=icono+mensajes[i]+" <button class=\"btn-image\" onclick='eliminar(mensajes["+i+"]);'></button><br></div>";
             }
             document.getElementById("resultado").innerHTML = codigoHTML;
         }

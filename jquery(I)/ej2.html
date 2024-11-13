@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+        <h1>Ocultar y aparecer</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis saepe omnis vel, assumenda deserunt ut possimus inventore porro optio non magnam fuga maiores eius neque itaque deleniti numquam nesciunt nisi.</p>
+        <p class="par">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque assumenda sit itaque quae provident, sint dolore voluptates fugiat quisquam et? Dolorem omnis hic sequi esse placeat ducimus voluptatibus consequuntur consequatur?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In temporibus nam earum minus rem quos incidunt cum nemo corrupti distinctio, eveniet, labore, ipsa facilis doloribus optio id ex quibusdam maxime.</p>
+        <p class="par">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil veritatis laudantium sint! Ex totam iusto, possimus excepturi atque neque sequi, quibusdam alias maiores laudantium soluta libero impedit laboriosam, illo iste.</p>
+        <button id="ocultar">Ocultar</button>
+        <button id="mostrar" >Aparecer</button>
+
+        <script>
+
+            $(document).ready(function () {
+                $("#ocultar").click(function () {
+                $(".par").hide();
+            });
+
+            $("#mostrar").click(function(){
+                $(".par").show();
+            })  
+            });
+           
+        </script>
+
+</body>
+</html>

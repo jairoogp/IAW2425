@@ -5,94 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Formulario</h1>
         <label for="">Nombre:</label><input type="text" id="nombre" required> <span id="campo1"></span> <br>
-        <label for="">Primer apellido:</label><input type="" id="apellido1" required><span id="campo2"></span><br>
-        <label for="">Segundo apellido:</label><input type="" id="apellido2" required><span id="campo3"></span><br>
+        <label for="">Primer apellido:</label><input type="text" id="apellido1" required><span id="campo2"></span><br>
+        <label for="">Segundo apellido:</label><input type="text" id="apellido2" required><span id="campo3"></span><br>
         <label for="">Dni:</label><input type="text" id="dni" required><span id="campo4"></span><br>
-        <label for="">Email:</label><input type="email" id="email" required><span id="campo5"></span><br>
+        <label for="">Email:</label><input type="email" id="correo" required><span id="campo5"></span><br>
         <label for="">Contraseña:</label><input type="password" id="contrasena" required><span id="campo6"></span><br>
         <label for="">Repita su contraseña:</label><input type="password" id="contrasena2" required><span id="campo7"></span><br>
-        <label for="">Descripción:</label><textarea rows="20" cols="20" name="" id="descripcion"></textarea><span id="campo8"></span><br>
-        <label for="">Fecha de nacimiento:</label><input type="text" id="fecnac"><span id="campo9"></span><br>
+        <label for="">Descripción:</label><textarea rows="10" cols="10" name="" id="descripcion"></textarea><span id="campo8"></span><br>
+        <label for="">Fecha de nacimiento:</label><input type="date" id="fecnac"><span id="campo9"></span><br>
         <label for="">Acepta la casilla de verificación</label><input type="checkbox" name="" id="verificacion"><span id="campo10"></span><br>
         <button onclick="enviar()">Enviar</button>
-
+        <p id="resultado"></p>
         <script>
             function enviar(){
-                document.getElementById("#resultado").innerHTML = "";
+                $("#resultado").text("");
                 let nombre = $("#nombre").val();
                 let apellido1 = $("#apellido1").val();
                 let apellido2 = $("#apellido2").val();
                 let dni = $("#dni").val();
-                let email = $("#email").val();
+                let correo = $("#correo").val();
                 let contrasena = $("#contrasena").val();
                 let contrasena2 =$("#contrasena2").val();
                 let descripcion = $("#descripcion").val();
                 let fecnac = $("#fecnac").val();
-                let verificacion = $("#verificacion").val();
+                let verificacion = $("#verificacion").is(":checked");
                 let errores = false;
-
-
+                let patronEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+                let nom1 = nombre.substr(0, 1);
+                let ape23 = apellido2.substr(0,3);
+                let dni3 = dni.substr(-3);
+                let usuario = (nom1 + ape23 + dni3).toLowerCase().replace(/\s+/g, '');
                 if(nombre==""){
-                    $("#campo1").text = "Rellena este campo";
+                    $("#campo1").text("Rellena este campo");
                     errores = true;
                 }
                 else{
-                    $("#campo1").text = "";
+                    $("#campo1").text("");
                 }
 
                 if(apellido1==""){
-                    $("#campo2").text = "Rellene este campo";
+                    $("#campo2").text("Rellena este campo");
                     errores = true;
                 }
                 else{
-                    $("#campo2").text = "";
+                    $("#campo2").text("");
                 }
 
                 if(apellido2==""){
-                    $("#campo3").text = "Rellene este campo";
+                    $("#campo3").text("Rellena este campo");
                     errores = true;
                 }
                 else{
-                    $("#campo3").text = "";
+                    $("#campo3").text("");
                 }
 
                 if(dni==""){
-                    $("#campo4").text = "Rellene este campo";
+                    $("#campo4").text("Rellena este campo");
                     errores = true;
                 }
-                else{
-                    $("#campo4").text = "";
+                else if(dni.length!=9){
+                    $("#campo4").text("El dni tiene que tener como mínimo 9 caracteres")
                 }
-                if(email==""){
-                    $("#campo5").text = "Rellena este campo";
+                else{
+                    $("#campo4").text("");
+                    validarDNI();
+                }
+                if(correo==""){
+                    $("#campo5").text("Rellena este campo");
                     errores = true;
                 }
+                else if (!patronEmail.test(correo)) {
+                $("#campo5").text("Formato de correo no válido");
+                errores = true;
+                 }
                 else{
-                    $("#campo5").text = "";
+                    $("#campo5").text("");
                 }
 
                 if(contrasena==""){
-                    $("#campo6").text = "Rellena este campo"
+                    $("#campo6").text("Rellena este campo");
                 }
                 else if (contrasena.length < 8){
-                    $("#campo6").text = "La contraseña tiene que tener al menos 8 caracteres";
+                    $("#campo6").text("La contraseña tiene que tener al menos 8 caracteres");
+                    errores = true;
                 }
-                else if(contrasena !== contrasena2){
-                    $("campo6").text = "Las contraseñas tienen que coincidir"
-                    $("campo7").text = "Las contraseñas tienen que coincidir"
+                else if (contrasena !== contrasena2){
+                    $("#campo6").text("Las contraseñas tienen que coincidir");
+                }
+                else{
+                    $("#campo6").text("");
                 }
                 if(contrasena2==""){
-                    $("#campo7").text = "Rellena este campo";
+                    $("#campo7").text("Rellena este campo");
+                    errores = true;   
                 } 
                 else if(contrasena2.length < 8){
-                    $("#campo7").text = "La contraseña tiene que tener al menos 8 caracteres";
-                }
+                    $("#campo7").text("La contraseña tiene que tener al menos 8 caracteres");
+                    errores = true;
 
+                }
+                else if (contrasena !== contrasena2){
+                    $("#campo7").text("Las contraseñas tienen que coincidir");
+                }
+                else{
+                    $("#campo7").text("");
+                }
+                if(verificacion ==""){
+                    $("#campo10").text("El campo verificación es necesario para completar el formulario");
+                    errores = true;
+                }
+                else{
+                    $("#campo10").text("");
+                }
+                if(!errores){
+                    $("#resultado").text("Tu usuario es " +usuario);
+                }
+            
+                function validarDNI(){
+                let dni = $("#dni").val();
+                let letra = dni[8];
+                let letras = ["T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"];
+                let numero = parseInt(document.getElementById("dni").value);
+                let resto = numero % 23;
+                letras[resto];
+                if (letra != letras[resto]) {
+                    $("#campo4").text("El DNI no es válido");
+                }
+                 }
+            
+            
             }
+
+         
         </script>
 </body>
 </html>

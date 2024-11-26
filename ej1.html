@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Visualizar los posts</h1>
+    <button id="visualizar">Visualizar todos los posts del sitio web</button>
+    <div id="resultados"></div>
+
+    <script>
+        $(document).ready(function () {
+            
+            $("#visualizar").click(function(){
+
+                $.ajax({
+                    url:'https://jsonplaceholder.typicode.com/posts',
+                    method: 'GET',
+                    success: function(data){
+                        let resultado = $("#resultados");
+                        resultado.empty();
+                        for(let i=0; i<data.length;i++){
+                            let userid = data[i].userId;
+                            let id = data[i].id;
+                            let title = data[i].title;
+                            let completed = data[i].completed;
+                            $("#resultados").html(
+                                "<p>Userid:" +userid+"</p>",
+                                "<p>Id:" +id+"</p>",
+                                "<p>Title:" +title+"</p>",
+                                "<p>Completed:" +completed+"</p>"
+                            )
+                        }
+                    },
+                    error:function(data){
+                        alert("Se ha producido un error");
+                    }
+               
+                })
+
+            })
+
+        });
+    </script>
+</body>
+</html>

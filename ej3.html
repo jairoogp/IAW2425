@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Introduce un nombre de pais</h1>
+    <input type="text" id="nombre">
+    <button id="visualizar">Visualizar galería de fotos</button>
+    <div id="resultados"></div>
+
+    <script>
+        $(document).ready(function () {
+            
+            $("#visualizar").click(function(){
+                let pais = $("#nombre").val();
+
+                $.ajax({
+                    url:'https://restcountries.com/v3.1/name'+pais,
+                    method: 'GET',
+                    success: function(data){
+                        let resultado = $("#resultados");
+                        resultado.empty();
+                        for(let i=0; i<data.length;i++){
+                            let albumid = data[i].albumId;
+                            let id = data[i].id;
+                            let title = data[i].title;
+                            let url = data[i].url;
+                            let thumbnailUrl = data[i].thumbnailUrl;
+                            $("#resultados").html(
+                                "<p>Albumid:" +albumid+"</p>",
+                                "<p>Id:" +id+"</p>",
+                                "<p>Title:" +title+"</p>",
+                                "<p>Url:" +url+"</p>",
+                                "<p>thumbnailUrl:" +thumbnailUrl+"</p>"
+                            )
+                        }
+                    },
+                    error:function(data){
+                        alert("Se ha producido un error");
+                    }
+               
+                })
+
+            })
+
+        });
+    </script>
+</body>
+</html>

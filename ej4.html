@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+        <h1>Pokemon</h1>
+        <input type="text" id="pokemon">
+        <button id="informacion">Muestrame la información del pokemon</button>
+        <div id="resultados"></div>
+      <script>
+
+            $(document).ready(function () {
+                $("#informacion").click(function(e){
+                    let pokemon = $("#pokemon").val();
+                    e.preventDefault();
+                    $.get("https://pokeapi.co/api/v2/pokemon/"+pokemon),function(r){
+                        $("#resultados").empty();
+                            let nombre = r.name;
+                          //  let url = r.url;
+                           // let habilidad = r[i].results.url.abilities.ability;
+                           // let crias = r[i].results.url.cries;
+                            let peso = r.weight;
+                            $("#resultados").html(
+                                '<p>Nombre:' +nombre+'</p>',
+                             //   '<p>Url:' +url+'</p>',
+                             //   '<p>Habilidad:' +habilidad+'</p>',
+                             //   '<p>Crias:' +crias+'</p>',
+                                '<p>Peso:' +peso+'</p>'
+                            );
+                       }
+
+                    
+                    .fail(function(){
+                        alert("Oh, ha ocurrido un error");
+                    });
+                })})
+            ;
+        </script>
+    </body>
+</html>

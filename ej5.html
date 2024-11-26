@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <h1>Muestra la imagen de un perro</h1>
+    <button id="imagen">Mostrar imagen</button>
+    <div id="resultados"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#imagen").click(function(){
+                $.get("https://dog.ceo/api/breeds/image/random").done(function(data){
+                    $("#resultados").empty();
+                    console.log(data);
+                        let imagen = data.message;
+                        $('#resultados').append(
+                            '<p>' + '<img width="300" height="300" src="' + imagen + '"></p>' 
+                            );
+                    })
+                    .fail(function(){
+                    alert("Error cargando datos del servidor");
+                })
+                });
+
+            })
+        ;
+    </script>
+</body>
+</html>

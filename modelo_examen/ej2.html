@@ -76,7 +76,7 @@
             <input min="1" type="number" name="codProducto" id="codProducto" value="1">
             <br>
             <label for="botones">Acción:</label>
-            <button onclick="obtenerproducto()" id="btn-producto">Obtener producto</button>
+            <button id="btn-producto">Obtener producto</button>
             <button id="btn-todos">Ver todos</button>
             <div id="resultados">
                 <!-- Aqui cargaremos los resultados-->
@@ -85,15 +85,54 @@
     </div>
     <script>
        $(document).ready(function () {
-        let url = 'https://fakestoreapi.com/products/1';
-        $.get(url,function(data){
+        $("#btn-todos").click(function(e){
+            e.preventDefault();
+            $.get("https://fakestoreapi.com/products").done(function(r){
+                $("#resultados").empty();
+                for(let i=0; i<r.length;i++){
+                    let titulo = r[i].title;
+                    let precio = r[i].price;
+                    let imagen = r[i].image;
+                    let descripcion = r[i].description;
+                    $("#resultados").append(
+                        '<p>' + '<img width="120" src="' + imagen + '"></p>' +
+                            '<p>Título: ' + titulo + '</p>' +
+                            '<p>Descripción: ' + descripcion + '</p>' +
+                            '<p>Precio: ' + precio + '€</p>'
+                    )
+                }
+            }).fail(function(){
+                alert("Error cargando datos del servidor")
+            })
+        })
+        $("#btn-producto").click(function(e){
+            e.preventDefault();
+            let codigo = $("#codProducto").val();
+
+            $.get('https://fakestoreapi.com/products/'+codigo).done(function(data){
+           
             let imagen = data.image;
             let titulo = data.title;
             let descripcion = data.description;
             let precio = data.price;
-            $("#resultados").html("Imagen: " +imagen+"<br>","Titulo: " +titulo+"<br>","Descripción: " +descripcion+"<br>","Precio: " +precio+"<br>");
+            $("#resultados").empty();
+            $("#resultados").html(
+                '<p>' + '<img width="120" src="' + imagen + '"></p>'+
+                "Titulo: " +titulo+"<br>"+
+                "Descripción: " +descripcion+"<br>"+
+                "Precio: " +precio+"€<br>"
+            );
+            
+         
         
+        }).fail(function(data){
+            alert("Error cargando datos del servidor")
         })
+
+        })
+
+       
+       
        });
     </script>
 </body>

@@ -9,7 +9,7 @@
 <body>
     <h1>Introduce un nombre de pais</h1>
     <input type="text" id="nombre">
-    <button id="visualizar">Visualizar galería de fotos</button>
+    <button id="visualizar">Ver características de un país</button>
     <div id="resultados"></div>
 
     <script>
@@ -19,25 +19,23 @@
                 let pais = $("#nombre").val();
 
                 $.ajax({
-                    url:'https://restcountries.com/v3.1/name'+pais,
+                    url:'https://restcountries.com/v3.1/name/'+pais,
                     method: 'GET',
                     success: function(data){
                         let resultado = $("#resultados");
                         resultado.empty();
-                        for(let i=0; i<data.length;i++){
-                            let albumid = data[i].albumId;
-                            let id = data[i].id;
-                            let title = data[i].title;
-                            let url = data[i].url;
-                            let thumbnailUrl = data[i].thumbnailUrl;
+                        console.log(data);
+                            let nombre = data[0].name.common;
+                            let capital = data[0].capital;
+                            let poblacion = data[0].maps.population;
+                            let bandera = data[0].flags.svg;
                             $("#resultados").html(
-                                "<p>Albumid:" +albumid+"</p>",
-                                "<p>Id:" +id+"</p>",
-                                "<p>Title:" +title+"</p>",
-                                "<p>Url:" +url+"</p>",
-                                "<p>thumbnailUrl:" +thumbnailUrl+"</p>"
-                            )
-                        }
+                                "<p>Nombre: " +nombre+"</p>"+
+                                "<p>Capital: " +capital+"</p>"+
+                                "<p>Población: " +poblacion+" habitantes</p>"+
+                                '<p>' + '<img width="120" src="' +bandera+ '"></p>'
+                            );
+                        
                     },
                     error:function(data){
                         alert("Se ha producido un error");

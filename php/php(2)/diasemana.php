@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <?php
 /*$dias = array("Domingo","Lunes","Martes","Miércoles","Jueves")
 $dia = date("d");
@@ -11,3 +19,5 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
  
 echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
 ?>
+</body>
+</html>

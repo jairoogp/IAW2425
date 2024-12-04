@@ -6,8 +6,10 @@
     <title>Super globales</title>
 </head>
 <body>
+    <a href=""></a>
     <?php
-    echo "La dirección IP de la que te estás conectando es " . $_SERVER['REMOTE_ADDR'] . ", el navegador que utilizas es " . $_SERVER['HTTP_REFERER'] . " y la página previa es " . $_SERVER['HTTP_REFERER'] . "<br>";
+    
+    echo "La dirección IP de la que te estás conectando es " . $_SERVER['REMOTE_ADDR'] . ", el navegador que utilizas es " . $_SERVER['HTTP_USER_AGENT'] . " y la página previa es " . $_SERVER['HTTP_REFERER'] . "<br>";
     ?>
 </body>
 </html>

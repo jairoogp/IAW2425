@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h2>Ejercicio 2</h2>
+    <label for="">Introduzca un número: </label><input type="number" name="numero" id="numero"><br>
+    <button id="catalogo">Ver catálogo completo</button>
+    <button id="libro">Consular por ID del libro</button>
+    <div id="resultados"></div>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#catalogo").click(function(e){
+                e.preventDefault();
+                $.get("https://gutendex.com/books/").done(function(r){
+                    $("#resultados").empty();
+                    for(let i=0; i<r.results.length;i++){
+                        let titulo = r.results[i].title;
+                        let autor = r.results[i].authors.name;
+                        let imagen = r.results[i].formats["image/jpeg"];
+                        let enlace = r.results[i].formats["text/html"];
+                        let numeroDescargas = r.results[i].download_count;
+                        $("#resultados").append(
+                            '<p>Título: ' + titulo + '</p>' +
+                            '<p>Autor: ' + autor + '</p>' +
+                            '<p>' + '<img width="120" src="' + imagen + '"></p>' +
+                            '<p>Enlace: ' + enlace + '</p>' +
+                            '<p>Número de descargas: ' + numeroDescargas + '</p>'
+                        )
+                    }
+                    
+                }).fail(function(){
+                    alert("Error cargando datos del servidor");
+                });
+            });
+            
+            
+            $("#libro").click(function(e){
+                e.preventDefault();
+                let numero = $("#numero").val();
+                $.get('https://gutendex.com/books/'+numero).done(function(data){
+                    let titulo = data.title;
+                    let imagen = data.formats["image/jpeg"];
+                    let autor = data.authors.map(author => author.name).join(", ");
+                    let enlace = data.formats["text/html"];
+                    let numeroDescargas = data.download_count;
+                    $("#resultados").empty();
+                    $("#resultados").append(
+                            '<p>Título: ' + titulo + '</p>' +
+                            '<p>Autor: ' + autor + '</p>' +
+                            '<p>' + '<img width="120" src="' + imagen + '"></p>' +
+                            '<p><a href="' + enlace + '">Enlace</a></p>' +
+                            '<p>Número de descargas: ' + numeroDescargas + '</p>'
+                    )
+                }).fail(function(data){
+                    alert("Error cargando datos del servidores")
+                })
+            })
+        })
+        
+    </script>
+</body>
+</html>

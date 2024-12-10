@@ -16,7 +16,7 @@
 
     <?php
     if(isset($_POST["nombre"])){
-        echo "Hola " . htmlspecialchars($_POST["nombre"]) . " hoy es " .date("D/M/y");
+        echo "Hola " . htmlspecialchars($_POST["nombre"]) . " hoy es " .date("d/m/y");
      }
      ?>
 </body>

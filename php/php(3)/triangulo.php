@@ -13,15 +13,7 @@
 	if (isset($_GET["numero"])){                // verifica si se ha enviado el parámetro número
 		$numero = htmlspecialchars($_GET["numero"]);        // evita inyecciones de código
 		if ($numero>0 && is_numeric($numero)){              //comprueba que es positivo y es numérico
-			for ($i=$numero;$i>=1;$i--)     // inicia la variable con el valor de numero ingresado por usuario // El bucle continuará ejecutándose mientras $i sea mayor o igual a 1 Después de cada iteración, $i se decrementa en 1.
-			{	
-				for($j=1;$j<=$i;$j++)
-				{
-					echo "* ";
-				}
-				echo "<br>";
-			}
-		}
+			
     /*    if ($numero>0 && is_numeric($numero)){              //comprueba que es positivo y es numérico
             for ($i=1;$i<=$numero;$i++)     // inicia la variable con el valor de numero ingresado por usuario // El bucle continuará ejecutándose mientras $i sea mayor o igual a 1 Después de cada iteración, $i se decrementa >
             {       

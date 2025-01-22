@@ -13,6 +13,10 @@
         <label for="">Apellidos:</label> <input type="text" name="apellidos" id="apellidos"><br>
         <label for="">Email:</label><input type="email" name="email" id="email">
         <label for="">Contraseña:</label> <input type="password" name="contrasena" id="contrasena"><br>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a66e9eee507e37d9347b832fc66310db62b3faa
         <button>Registrarse</button>
         </form>
 
@@ -26,7 +30,11 @@
                   die ("Ocurrio un problema con la conexión:" .mysqli_connect_error());
               }
               if($_SERVER['REQUEST_METHOD'] === "POST"){
+<<<<<<< HEAD
                     if(empty($_POST['nombre'])) || (empty($_POST['apellidos'])) || (empty($_POST['email'])) || (empty($_POST['contrasena'])){
+=======
+                    if(empty($_POST['nombre'])) || (empty($_POST['apellidos'])) || (empty($_POST['email'])) || (empty($_POST['contrasena'])) || (empty($_POST['contrasena2'])){
+>>>>>>> 0a66e9eee507e37d9347b832fc66310db62b3faa
                         die("Error: Todos los campos son obligatorios")
                     }
               }

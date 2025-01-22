@@ -19,7 +19,7 @@
 
     // Usuarios y contraseñas predefinidos
     $usuarios_validos = [
-        'joseluisnunez' => '$2y$10$.fFP6viq9oS/yoHkvOFO4eDYY.mqSFkdO8btaWCjHXKzzIzwtqZxm ', //joseluis25
+        'joseluisnunez' => '$2y$10$.fFP6viq9oS/yoHkvOFO4eDYY.mqSFkdO8btaWCjHXKzzIzwtqZxm',
         'vicedirector' => '$2y$10$gmi.sIaAJV2q20ROFnruiunTtisPy9zNPeKDHPMGuP3tyB5Lf5LVO',
         'extraescolares' => '$2y$10$nQwBgrgZM8jIlxgwax8CtecfffitSrU09IyctMdM9rHaRJVZqLct2'
     ];

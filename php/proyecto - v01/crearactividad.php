@@ -30,9 +30,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     $total_alumnos = $_POST['total_alumnos'];
     $objetivo = $_POST['objetivo'];
 
-    $query = "INSERT INTO actividad (titulo, tipo, departamento, profesor_responsable, trimestre, fecha_inicio, hora_inicio, fecha_fin, hora_fin, organizador, acompañantes, ubicacion, coste, total_alumnos, objetivo) VALUES ('$titulo', '$tipo', '$departamento', '$profesor_responsable', '$trimestre', '$fecha_inicio', '$hora_inicio', '$fecha_fin', '$hora_fin', '$organizador', '$acompañantes', '$ubicacion', '$coste', '$total_alumnos', '$objetivo')";
+    $query = "INSERT INTO actividad (titulo, tipo, departamento, profesor_responsable, trimestre, fecha_inicio, hora_inicio, fecha_fin, hora_fin, organizador, acompañantes, ubicación, coste, total_alumnos, objetivo) VALUES ('$titulo', '$tipo', '$departamento', '$profesor_responsable', '$trimestre', '$fecha_inicio', '$hora_inicio', '$fecha_fin', '$hora_fin', '$organizador', '$acompañantes', '$ubicacion', '$coste', '$total_alumnos', '$objetivo')";
 
-    if(mysqli_query($enalce,$query)){
+    if(mysqli_query($enlace,$query)){
         echo "Actividad agregada exitosamente";
     }else{
         echo "Error" .$query . "<br>" . mysqli_error($enlace);
@@ -52,7 +52,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 <body>
     <h2>Añadir nueva actividad</h2>
 
-    <form method ="POST" action="">
+    <form method ="POST" action="crearactividad.php">
     <label for="">Título:</label> <input type="text" name="titulo" id="titulo"> <br>
     <label for="">Tipo:</label> <input type="text" name="tipo" id="tipo"> <br>
     <label for="">Departamento:</label> <input type="text" name="departamento" id="departamento"> <br>

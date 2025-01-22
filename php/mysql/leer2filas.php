@@ -10,7 +10,7 @@
         die("Ocurró un problema con la conexión :" .mysqli_connect_error());
     }
     // Construcción de la query
-    $query = "SELECT * FROM usuarios LIMIT 1";
+    $query = "SELECT * FROM usuarios LIMIT 2";
     // Ejecución de la Query 
     $resultado = mysqli_query($enlace, $query);
 

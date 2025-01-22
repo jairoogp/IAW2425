@@ -1,5 +1,7 @@
 <?php
-    if(!isset($_SESSION['username']) || | !in_array($_SESSION['username'], ['joseluisnunez', 'vicedirector', 'extraescolares'])){
+    session_start();
+
+    if(!isset($_SESSION['username']) || !in_array($_SESSION['username'], ['joseluisnunez', 'vicedirector', 'extraescolares'])){
         header('Location: index.php');
         exit();
     }
@@ -15,10 +17,13 @@
     <h2>Bienvenido, <?php echo htmlspecialchars($_SESSION['username']);?></h2>
     <p>Este es el dashboard donde puedes gestionar las actividades</p>
     <a href="logout.php">Cerrar sesión</a> <br>
-    <h2>Gestión de actividades</h2>
-    <a href="crearactividad.php">Añadir una actividad</a>
-    //Conexion a la base de datos 
-    <?php
+    <ul>
+        <li><a href="crearactividad.php">Añadir Actividad</a></li>
+        <li><a href="logout.php">Cerrar Sesión</a></li>
+    </ul>
+   <h2>Gestión de actividades</h2>
+   
+    <?php/*
     $servername = "sql110.thsite.top";
     $username= "thsi_38097882";
     $password= "lLIMj?ad";
@@ -81,6 +86,6 @@
             }
 mysqli_close($enlace);
     ?>
-    
+    */
 </body>
 </html>

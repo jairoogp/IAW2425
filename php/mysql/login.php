@@ -7,7 +7,7 @@
 </head>
 <body>
     <form method="POST" action="login.php"></form>
-    <label for="">Email</label><input type="text" name="email" id="email"> <br>
+    <label for="">Usuario</label><input type="text" name="username" id="username"> <br>
     <label for="">Contraseña</label><input type="password" name="password" id="password"> <br>
     <input type="submit" value="Iniciar sesión">
 </body>
@@ -21,21 +21,20 @@
   $enlace = mysqli_connect($servername,$username,$password,$bd);
   if(!$enlace){
       die ("Ocurrio un problema con la conexión:" .mysqli_connect_error());
-  
   if($_SERVER['REQUEST_METHOD'] === "POST"){
-    if (empty($_POST['email']) || empty($_POST['password'])) {
+    if (empty($_POST['username']) || empty($_POST['password'])) {
         die("Error: Todos los campos son obligatorios.");
     }
-    $email = htmlspecialchars(trim($_POST['email']));
+    $usuarioo = htmlspecialchars(trim($_POST['username']));
     $password = htmlspecialchars(trim($_POST['password']));
         // Consultar el usuario por email
-        $query = "SELECT * FROM usuarios WHERE email='$email'";
+        $query = "SELECT * FROM usuarios WHERE username='$usuarioo'";
         $resultado = mysqli_query($enlace, $query);
         if(mysqli_num_rows($resultado) === 1){
             $usuario = mysqli_fetch_assoc($resultado);
             $password_hashed = crypt($password, $usuario['password']);
-            if ($usuario['password'] === $password){ // CASO 1 (GRAN ERROR)
-                //if (hash_equals($usuario['password'], $password_hashed)) {
+           // if ($usuario['password'] === $password){ // CASO 1 (GRAN ERROR)
+                if (hash_equals($usuario['password'], $password_hashed)) {
                     echo "Inicio de sesión exitoso. Bienvenido, " . $usuario['nombre'] . "!";
                 } else {
                     echo "Error: Contraseña incorrecta." . $password_hashed . " es diferente de " . $usuario['password'];
